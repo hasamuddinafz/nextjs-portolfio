@@ -4,8 +4,6 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
-import { baseURL } from '../../../utils/url';
-
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,7 +12,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${baseURL}/api/login`, { email, password });
+      const response = await axios.post(`http://localhost:3000/api/login`, { email, password });
       // sessionStorage.setItem('token', response.data.token); // Use session storage
       router.push('/admin'); // Navigate to the dashboard
     } catch (error) {
