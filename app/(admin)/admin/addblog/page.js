@@ -1,8 +1,12 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
-import JoditEditor from 'jodit-react';
+import dynamic from 'next/dynamic';
 import axios from 'axios';
+
+const JoditEditor = dynamic(() => import('jodit-react'), {
+  ssr: false
+});
 
 function AddPost() {
   const [title, setTitle] = useState('');
