@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from 'isomorphic-dompurify'
 async function getPosts() {
-  const res = await fetch(`${process.env.domain}/api/posts/`, { method: 'GET' });
+  const res = await fetch(`${process.env.DOMAIN}/api/posts/`, { method: 'GET' });
   if (!res.ok) throw new Error('Failed to fetch posts');
   const data = await res.json();
   return data;

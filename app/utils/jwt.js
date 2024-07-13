@@ -3,12 +3,10 @@
 import jwt from 'jsonwebtoken';
 
 // JWT Secret (replace with your actual secret)
-const JWT_SECRET = 'your_jwt_secret';
-
 // Function to sign JWT token
 export function signToken(payload) {
   try {
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '7d' }); // Token expires in 7 days
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' }); // Token expires in 7 days
     return token;
   } catch (error) {
     console.error('JWT Signing Error:', error);
