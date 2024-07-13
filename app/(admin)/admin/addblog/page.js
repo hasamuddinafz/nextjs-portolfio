@@ -14,13 +14,16 @@ function AddPost() {
   const editor = useRef(null);
 
   useEffect(() => {
-    axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories/`, { withCredentials: true })
-      .then(response => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories/`, { withCredentials: true });
         setCategories(response.data);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error fetching categories:', error);
-      });
+      }
+    };
+
+    fetchCategories();
   }, []);
 
   const handleSubmit = async (e) => {
