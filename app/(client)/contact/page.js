@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import baseURL from '../../utils/url'
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -20,7 +21,7 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:3000/api/contacts/`, {
+      const response = await fetch(`${baseURL}/api/contacts/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

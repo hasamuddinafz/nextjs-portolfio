@@ -4,7 +4,7 @@ import React from 'react';
 
 // Fetch posts server-side
 async function getPosts() {
-  const res = await fetch(`http://localhost:3000/api/posts/`, { method: 'GET' });
+  const res = await fetch(`${process.env.domain}/api/posts/`, { method: 'GET' });
   if (!res.ok) throw new Error('Failed to fetch posts');
   const data = await res.json();
   return data;

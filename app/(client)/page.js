@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from 'isomorphic-dompurify'
-import { ToastContainer } from "react-toastify";
 async function getPosts() {
-  const res = await fetch(`http://localhost:3000/api/posts/`, { method: 'GET' });
+  const res = await fetch(`${process.env.domain}/api/posts/`, { method: 'GET' });
   if (!res.ok) throw new Error('Failed to fetch posts');
   const data = await res.json();
   return data;
