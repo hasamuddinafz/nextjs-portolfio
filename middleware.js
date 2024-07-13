@@ -2,10 +2,10 @@
 
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { verifyToken } from './app/utils/jwt'; // Adjust the path based on your structure
+import { verifyToken } from './utils/jwt'; // Adjust the path if needed
 
 export async function middleware(request) {
-  const cookieStore = cookies(request.headers); // Use request.headers to access headers
+  const cookieStore = cookies();
   const token = cookieStore.get('token');
 
   console.log('Token:', token);
@@ -19,11 +19,11 @@ export async function middleware(request) {
     const decodedToken = await verifyToken(token.value);
     console.log('Token verified:', decodedToken);
 
-    // Proceed with next middleware or handler
+    // Proceed with the next middleware or handler
     return NextResponse.next();
   } catch (error) {
     console.error('Token verification error:', error);
-
+    
     // Redirect to login page on token verification failure
     return NextResponse.redirect(new URL('/login', request.url));
   }
