@@ -12,7 +12,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`/api/login`, { email, password });
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/login`, { email, password });
       // sessionStorage.setItem('token', response.data.token); // Use session storage
       router.push('/admin'); // Navigate to the dashboard
     } catch (error) {

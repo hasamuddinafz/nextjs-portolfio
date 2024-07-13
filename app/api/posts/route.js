@@ -13,7 +13,7 @@ export async function GET(req) {
   if (id) {
     // Fetch a single post by ID
     try {
-      const post = await Post.findById(id);//////////////////////////////////////////////////////////////////////////////
+      const post = await Post.findById(id).populate('category');//////////////////////////////////////////////////////////////////////////////
       if (!post) {
         return NextResponse.json({ error: 'Post not found' }, { status: 404 });
       }

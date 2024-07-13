@@ -2,7 +2,7 @@ import Image from 'next/image';
 import DOMPurify from 'isomorphic-dompurify';
 
 async function getPost(id) {
-  const res = await fetch(`${process.env.DOMAIN}/api/posts?id=${id}`, { method: 'GET' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts?id=${id}`, { method: 'GET' });
   if (!res.ok) {
     throw new Error('Failed to fetch post');
   }

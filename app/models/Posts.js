@@ -12,10 +12,12 @@ const postSchema = new mongoose.Schema({
   image: String,
   category: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category',
+    ref: 'Category', // Ensure this matches the Category model
     required: true,
   },
   tags: [String],
 }, { timestamps: true });
 
-module.exports = mongoose.models.Post || mongoose.model('Post', postSchema);
+const Post = mongoose.models.Post || mongoose.model('Post', postSchema);
+
+module.exports = Post;

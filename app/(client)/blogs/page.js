@@ -5,13 +5,13 @@ import Link from 'next/link'; // Use Link from Next.js for client-side navigatio
 import Image from 'next/image';
 // import { baseURL } from '../Urls'; // Adjust the import path based on your project structure
 async function getPosts() {
-  const res = await fetch(`/api/posts/`, { method: 'GET' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts/`, { method: 'GET' });
   if (!res.ok) throw new Error('Failed to fetch posts');
   const data = await res.json();
   return data;
 }
 async function getCategories() {
-  const res = await fetch(`/api/categories/`, { method: 'GET' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories/`, { method: 'GET' });
   if (!res.ok) throw new Error('Failed to fetch posts');
   const data = await res.json();
   return data;
