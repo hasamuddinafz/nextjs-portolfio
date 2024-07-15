@@ -1,12 +1,11 @@
 import react from 'react';
-import axios from 'axios';
 import DOMPurify from 'isomorphic-dompurify';
 import Link from 'next/link'; // Use Link from Next.js for client-side navigation
 import Image from 'next/image';
 // import { baseURL } from '../Urls'; // Adjust the import path based on your project structure
 async function getPosts() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts/`, {
+    const res = await fetch(`/api/posts/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -30,7 +29,7 @@ async function getPosts() {
 
 async function getCategories() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories/`, {
+    const res = await fetch(`/api/categories/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -61,7 +60,7 @@ export default async function Blogs() {
     posts = await getPosts();
     categories = await getCategories();
     JSON.stringify(posts);
-    
+
   } catch (error) {
     console.error('Failed to fetch data:', error);
     // Handle or log the error appropriately

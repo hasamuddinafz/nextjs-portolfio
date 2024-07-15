@@ -3,27 +3,28 @@ import Link from "next/link";
 import DOMPurify from 'isomorphic-dompurify'
 async function getPosts() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts/`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-    });
-    
-    if (!res.ok) {
-      const errorText = await res.text(); // Log response text
-      console.error('Fetch error:', res.status, errorText);
-      throw new Error('Failed to fetch posts');
-    }
-    
-    const data = await res.json();
-    return data;
+      const res = await fetch(`/api/posts/`, {
+          method: 'GET',
+          headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+          },
+      });
+
+      if (!res.ok) {
+          const errorText = await res.text(); // Read error response body as text
+          console.error('Fetch error:', res.status, errorText);
+          throw new Error('Failed to fetch posts');
+      }
+
+      const data = await res.json();
+      return data;
   } catch (error) {
-    console.error('An error occurred while fetching posts:', error);
-    throw error;
+      console.error('Error fetching posts:', error);
+      throw error; // Propagate the error
   }
 }
+
 
 
 const sanitizeHtml = (html, maxLength) => {
