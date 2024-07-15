@@ -1,12 +1,16 @@
 // ./app/utils/jwt.js
 
-import jwt from 'jsonwebtoken';
+import { SignJWT, jwtVerify } from 'jose';
 
-// JWT Secret (replace with your actual secret)
 // Function to sign JWT token
-export function signToken(payload) {
+export async function signToken(payload) {
   try {
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' }); // Token expires in 7 days
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+    const token = await new SignJWT(payload)
+      .setProtectedHeader({ alg: 'HS256' })
+      .setExpirationTime('7d') // Token expires in 7 days
+      .sign(secret);
+
     return token;
   } catch (error) {
     console.error('JWT Signing Error:', error);
@@ -15,21 +19,18 @@ export function signToken(payload) {
 }
 
 // Function to verify JWT token
-export function verifyToken(token) {
+export async function verifyToken(token) {
   try {
-    const decoded = jwt.decode(token, { complete: true }); // Decode the token to get header and payload
-
-    if (!decoded) {
-      throw new Error('Invalid token');
-    }
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+    const { payload } = await jwtVerify(token, secret);
 
     // Optionally verify the token's expiration (adjust as per your needs)
     const currentTimestamp = Math.floor(Date.now() / 1000);
-    if (decoded.payload.exp && decoded.payload.exp < currentTimestamp) {
+    if (payload.exp && payload.exp < currentTimestamp) {
       throw new Error('Token expired');
     }
 
-    return decoded.payload; // Return the decoded payload if verification is successful
+    return payload; // Return the decoded payload if verification is successful
   } catch (error) {
     console.error('JWT Verification Error:', error);
     throw new Error('Invalid token');

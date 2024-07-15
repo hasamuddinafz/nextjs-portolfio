@@ -2,7 +2,7 @@
 
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { verifyToken } from './app/utils/jwt'; // Adjust the path if needed
+import { verifyToken } from './utils/jwt'; // Adjust the path if needed
 
 export async function middleware(request) {
   const cookieStore = cookies();

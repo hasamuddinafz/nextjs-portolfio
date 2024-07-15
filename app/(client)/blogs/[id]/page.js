@@ -2,7 +2,12 @@ import Image from 'next/image';
 import DOMPurify from 'isomorphic-dompurify';
 
 async function getPost(id) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts?id=${id}`, { method: 'GET' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts?id=${id}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },});
   if (!res.ok) {
     throw new Error('Failed to fetch post');
   }
