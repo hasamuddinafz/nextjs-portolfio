@@ -6,7 +6,7 @@ async function getPosts() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts/`, {
       method: 'GET',
       headers: {
-        // Add your headers here
+        Accept: 'application/json',
         'Content-Type': 'application/json'
       },
     });

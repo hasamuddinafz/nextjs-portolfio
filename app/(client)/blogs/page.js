@@ -9,6 +9,7 @@ async function getPosts() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts/`, {
       method: 'GET',
       headers: {
+        Accept: 'application/json',
         'Content-Type': 'application/json'
       },
     });
@@ -32,6 +33,7 @@ async function getCategories() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories/`, {
       method: 'GET',
       headers: {
+        Accept: 'application/json',
         'Content-Type': 'application/json'
       },
     });
