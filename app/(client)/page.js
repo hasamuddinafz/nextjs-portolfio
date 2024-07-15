@@ -3,7 +3,7 @@ import Link from "next/link";
 import DOMPurify from 'isomorphic-dompurify'
 async function getPosts() {
   try {
-      const res = await fetch(`/api/posts/`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts/`, {
           method: 'GET',
           headers: {
               Accept: 'application/json',

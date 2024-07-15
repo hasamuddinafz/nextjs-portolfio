@@ -1,11 +1,12 @@
 import react from 'react';
+
 import DOMPurify from 'isomorphic-dompurify';
 import Link from 'next/link'; // Use Link from Next.js for client-side navigation
 import Image from 'next/image';
 // import { baseURL } from '../Urls'; // Adjust the import path based on your project structure
 async function getPosts() {
   try {
-    const res = await fetch(`/api/posts/`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -29,7 +30,7 @@ async function getPosts() {
 
 async function getCategories() {
   try {
-    const res = await fetch(`/api/categories/`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
