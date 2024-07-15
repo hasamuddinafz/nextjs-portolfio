@@ -3,7 +3,13 @@ import Link from "next/link";
 import DOMPurify from 'isomorphic-dompurify'
 async function getPosts() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts/`, { method: 'GET' });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts/`, {
+      method: 'GET',
+      headers: {
+        // Add your headers here
+        'Content-Type': 'application/json'
+      },
+    });
     
     if (!res.ok) {
       const errorText = await res.text(); // Log response text
