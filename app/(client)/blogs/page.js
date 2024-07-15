@@ -53,8 +53,16 @@ async function getCategories() {
 
 
 export default async function Blogs() {
-  const posts = await getPosts();
-  const categories = await getCategories();
+  let posts = [];
+  let categories = [];
+
+  try {
+    posts = await getPosts();
+    categories = await getCategories();
+  } catch (error) {
+    console.error('Failed to fetch data:', error);
+    // Handle or log the error appropriately
+  }
 
   const stripHtmlTags = (html) => {
     return html.replace(/<[^>]*>?/gm, '');
