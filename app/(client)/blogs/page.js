@@ -53,7 +53,6 @@ async function getCategories() {
 }
 
 
-
 export default async function Blogs() {
   let posts = [];
   let categories = [];
@@ -61,6 +60,8 @@ export default async function Blogs() {
   try {
     posts = await getPosts();
     categories = await getCategories();
+    JSON.stringify(posts);
+    
   } catch (error) {
     console.error('Failed to fetch data:', error);
     // Handle or log the error appropriately
@@ -117,7 +118,7 @@ export default async function Blogs() {
                           <h4 className="text-2xl font-bold">{post.title}</h4>
                       </Link>
                       <p className="text-gray-600">{new Date(post.createdAt).toISOString().split('T')[0]} | <span className="font-bold text-danger"> {post.category.category} </span></p>
-                      {/* <div className="text-dark"dangerouslySetInnerHTML={{__html: sanitizeHtml(post.description, 150)}} />... */}
+                      <div className="text-dark"dangerouslySetInnerHTML={{__html: sanitizeHtml(post.description, 150)}} />...
                       <Link className='text-orange-500' target='_blank' href={`/blogs/${post._id}`}>
                         Read more
                       </Link>
