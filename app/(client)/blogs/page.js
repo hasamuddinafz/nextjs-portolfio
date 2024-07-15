@@ -5,29 +5,51 @@ import Link from 'next/link'; // Use Link from Next.js for client-side navigatio
 import Image from 'next/image';
 // import { baseURL } from '../Urls'; // Adjust the import path based on your project structure
 async function getPosts() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts/`, {
-    method: 'GET',
-    headers: {
-      // Add your headers here
-      'Content-Type': 'application/json'
-    },
-  });
-  if (!res.ok) throw new Error('Failed to fetch posts');
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text(); // Read error response body as text
+      console.error('Fetch error:', res.status, errorText);
+      throw new Error('Failed to fetch posts');
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('An error occurred while fetching posts:', error);
+    throw error;
+  }
 }
+
 async function getCategories() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories/`, {
-    method: 'GET',
-    headers: {
-      // Add your headers here
-      'Content-Type': 'application/json'
-    },
-  });
-  if (!res.ok) throw new Error('Failed to fetch posts');
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text(); // Read error response body as text
+      console.error('Fetch error:', res.status, errorText);
+      throw new Error('Failed to fetch categories');
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('An error occurred while fetching categories:', error);
+    throw error;
+  }
 }
+
 
 
 export default async function Blogs() {
