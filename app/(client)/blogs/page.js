@@ -6,7 +6,7 @@ import Image from 'next/image';
 // import { baseURL } from '../Urls'; // Adjust the import path based on your project structure
 async function getPosts() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts/`, {
+    const res = await fetch(`/api/posts/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -30,7 +30,7 @@ async function getPosts() {
 
 async function getCategories() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories/`, {
+    const res = await fetch(`/api/categories/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
