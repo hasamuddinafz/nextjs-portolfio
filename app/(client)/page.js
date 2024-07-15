@@ -100,7 +100,7 @@ export default async function Home() {
                   <h5 className="poppins-bold text-2xl mb-2">{post.title}</h5>
                   <span className="text-gray-600 poppins-bold mb-2"> <i className="bi bi-person-fill"></i> Hasamuddin Afzali</span>
                   <p className="text-gray-500 mb-2"> <i className="bi bi-clock"></i> {new Date(post.createdAt).toISOString().split('T')[0]} | <i className="bi bi-tags"></i> {post.category.category}</p>
-                  <div className="text-dark"dangerouslySetInnerHTML={{__html: sanitizeHtml(post.description, 150)}} />...
+                  {/* <div className="text-dark"dangerouslySetInnerHTML={{__html: sanitizeHtml(post.description, 150)}} />... */}
 
                   <Link className="text-orange-500 poppins-bold" href={`/blogs/${post._id}`}>Read more</Link>
                 </div>
