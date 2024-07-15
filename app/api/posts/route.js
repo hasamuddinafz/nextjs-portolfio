@@ -1,6 +1,7 @@
 // app/api/posts/route.js
 import connectMongo from '../../lib/mongodb';
 import Post from '../../models/Posts';
+import Category from '../../models/Categories';
 import { NextResponse } from 'next/server';
 
 export async function GET(req) {

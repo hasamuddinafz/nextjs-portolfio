@@ -2,18 +2,23 @@ import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from 'isomorphic-dompurify'
 async function getPosts() {
-
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts/`, { method: 'GET' });
-  
-  if (!res.ok) {
-    const errorText = await res.text(); // Log response text
-    console.error('Fetch error:', errorText);
-    throw new Error('Failed to fetch posts');
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/posts/`, { method: 'GET' });
+    
+    if (!res.ok) {
+      const errorText = await res.text(); // Log response text
+      console.error('Fetch error:', res.status, errorText);
+      throw new Error('Failed to fetch posts');
+    }
+    
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('An error occurred while fetching posts:', error);
+    throw error;
   }
-  
-  const data = await res.json();
-  return data;
 }
+
 
 const sanitizeHtml = (html, maxLength) => {
   const plainText =  DOMPurify.sanitize(html, { ALLOWED_TAGS: [] });
